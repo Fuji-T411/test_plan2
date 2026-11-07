@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テスト勉強シートメーカー</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+<style id="pg"></style>
+<style>
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN','BIZ UDPGothic','Meiryo',sans-serif;background:#e2e8f0}
+.sheet-wrap{width:calc(var(--w)*var(--s));height:calc(var(--h)*var(--s));margin:0 auto 18px;box-shadow:0 2px 10px rgba(0,0,0,.25);background:#fff}
+.sheet{width:var(--w);height:var(--h);transform:scale(var(--s));transform-origin:0 0;background:#fff;display:flex;overflow:hidden;color:#222;box-sizing:border-box}
+.page{flex:1;min-width:0;display:flex;flex-direction:column;gap:.6em;padding:var(--pad);box-sizing:border-box;line-height:1.3}
+.spread .page+.page{border-left:1px dashed #999}
+.hd{display:flex;align-items:center;gap:.6em;border-bottom:3px solid #1f3a5f;padding-bottom:.25em}
+.hd h2{font-size:1.65em;font-weight:900;color:#1f3a5f;margin:0}
+.hd small{color:#555}
+.tag{background:#1f3a5f;color:#fff;border-radius:.3em;padding:.1em .5em;font-weight:900}
+.nm{margin-left:auto;display:flex;align-items:flex-end;gap:.4em;font-weight:700}
+.nm i{display:inline-block;width:9em;border-bottom:1.5px solid #333;height:1.3em}
+.sec{border:1.5px solid #333;border-radius:.6em;padding:.4em .6em .5em;display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden}
+.sec>h3{font-weight:900;font-size:1.05em;margin:0 0 .3em;display:flex;gap:.4em;align-items:baseline;flex-wrap:wrap}
+.sec>h3 small{font-weight:400;font-size:.78em;color:#444}
+.no{display:inline-grid;place-items:center;width:1.4em;height:1.4em;border-radius:50%;background:#1f3a5f;color:#fff;font-size:.85em}
+.chip{display:inline-block;min-width:3em;text-align:center;font-weight:900;border-radius:.35em;padding:.1em .35em;margin:.05em}
+.g{display:grid;flex:1;min-height:0;border-top:1px solid #555;border-left:1px solid #555}
+.g>div{border-right:1px solid #555;border-bottom:1px solid #555;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;align-content:center;text-align:center;padding:.1em .3em;min-width:0;overflow:hidden;line-height:1.25}
+.g>.h{background:#eef1f5;font-size:.8em;font-weight:700}
+.g>.l{justify-content:flex-start;text-align:left}
+.g>.end{justify-content:flex-end;align-items:flex-end;padding:.2em .5em}
+.g>.gy{background:#e6e6e6}
+.g small{font-size:.75em;color:#444;font-weight:400;display:block;width:100%}
+.top{display:flex;gap:.6em;flex:0 0 auto}
+.top>.s1{flex:1.05}.top>.s2{flex:1.8}.top>.s3{flex:.75}
+.narrow .top{display:grid;grid-template-columns:1fr 1fr}
+.narrow .s1{grid-area:1/1}.narrow .s3{grid-area:2/1}.narrow .s2{grid-area:1/2/3/3}
+.ops{flex:none;display:flex;flex-direction:column;gap:.3em}
+.opt{display:flex;gap:.45em;align-items:center}
+.opt b{font-size:.92em}.opt small{display:block;font-size:.72em;color:#444;line-height:1.2}
+.cb{width:1.25em;height:1.25em;border:2px solid #333;border-radius:.25em;flex:none}
+.fh{font-weight:900;font-size:.9em;margin:.3em 0 .15em;border-top:1px dashed #888;padding-top:.3em}
+.fh small{font-weight:400;font-size:.8em}
+.cg{display:grid;flex:1;min-height:0;grid-template-columns:repeat(var(--c),1fr);grid-template-rows:repeat(var(--r),minmax(0,1fr));border-top:1px solid #555;border-left:1px solid #555}
+.cg i{border-right:1px solid #555;border-bottom:1px solid #555}
+.days{display:grid;gap:.4em;flex:1;min-height:0;grid-auto-rows:minmax(0,1fr)}
+.day{border:1.3px solid #555;border-radius:.4em;display:flex;flex-direction:column;overflow:hidden;min-height:0;min-width:0}
+.dh{background:#eef1f5;text-align:center;font-weight:900;padding:.1em;border-bottom:1px solid #555}
+.dh small{font-size:.75em;margin-left:.15em}.sun small{color:#d33}.sat small{color:#27c}
+.db{flex:1;min-height:0;padding:.2em;font-size:.8em}.day.t .db{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;align-content:center;text-align:center;font-size:.9em}
+.df{display:flex;justify-content:flex-end;align-items:center;gap:.3em;padding:.15em .3em;font-size:.72em;color:#444}
+.ring{display:inline-block;width:1.9em;height:1.9em;border:1.5px solid #333;border-radius:50%}
+.day.t{border-width:2px;border-color:#1f3a5f}.day.t .dh{background:#1f3a5f;color:#fff}
+.ret{gap:.3em;flex-wrap:nowrap!important}
+.ret i{font-style:normal;width:1.8em;height:1.8em;border:1.3px solid #666;border-radius:50%;display:inline-grid;place-items:center;font-weight:900}
+.lns{flex:1;min-height:0;display:grid;grid-template-rows:repeat(var(--n),minmax(0,1fr))}.lns i{border-bottom:1px solid #888}.g>.rc{flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:stretch;padding:0}.rc .tl{flex:1}.mk{display:flex;flex-wrap:wrap;justify-content:space-around;gap:.1em;border-top:1px dashed #888;padding:.15em 0;font-size:.62em}.mk i,.sat i{font-style:normal;width:1.6em;height:1.6em;border:1px solid #555;border-radius:50%;display:inline-grid;place-items:center;font-weight:900;line-height:1}.g>.rs{flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:space-evenly}.rs>div{display:flex;align-items:center;gap:.25em}.sat{font-size:.85em}.sat span{font-size:.8em;color:#444}.sat i{width:1.7em;height:1.7em;font-size:.95em}
+.bl{flex:1;border-bottom:1px solid #666;height:1.4em;margin-right:.3em}
+.row{display:flex;gap:.6em;min-height:0}
+.sg{display:flex;align-items:flex-end;gap:.3em;font-weight:700;font-size:.9em;padding-top:.2em}
+.sg i{flex:1;border-bottom:1.5px solid #333;height:1.4em}
+@media print{
+ body{background:#fff}
+ #panel,#hint{display:none!important}
+ #layout,#preview{display:block!important;padding:0!important;margin:0!important}
+ .sheet-wrap{width:var(--w)!important;height:calc(var(--h) - .6mm)!important;margin:0!important;box-shadow:none!important;overflow:hidden;break-after:page}
+ .sheet-wrap:last-child{break-after:auto}
+ .sheet{transform:none!important;height:calc(var(--h) - .6mm)}
+}
+</style>
+</head>
+<body>
+<div id="layout" class="lg:flex lg:items-start">
+<aside id="panel" class="lg:w-80 lg:shrink-0 lg:h-screen lg:overflow-y-auto lg:sticky lg:top-0 bg-white p-4 space-y-4 text-sm shadow">
+ <h1 class="text-lg font-black text-slate-800">テスト勉強シートメーカー</h1>
+ <section>
+  <h2 class="font-bold mb-1">1. 用紙サイズ・レイアウト</h2>
+  <div class="space-y-1" id="paper">
+   <label class="flex gap-2"><input type="radio" name="paper" value="A4"> A4 横（裏表）</label>
+   <label class="flex gap-2"><input type="radio" name="paper" value="B5" checked> B5 横（裏表）</label>
+   <label class="flex gap-2"><input type="radio" name="paper" value="B4"> B4 横（見開き：左=表／右=裏）</label>
+  </div>
+  <label class="flex gap-2 mt-2"><input type="checkbox" id="single"> 裏面を使わず片面に収める</label>
+  <p class="text-xs text-slate-500">教科が少ないときに便利です。表と裏を1枚の左右に並べます（B4は常に見開き）。</p>
+ </section>
+ <section>
+  <h2 class="font-bold mb-1">2. テスト期間</h2>
+  <div class="grid grid-cols-2 gap-2">
+   <label>開始日<input type="date" id="start" class="w-full border rounded px-1 py-1"></label>
+   <label>テスト日<input type="date" id="test" class="w-full border rounded px-1 py-1"></label>
+  </div>
+  <p id="days" class="text-xs text-slate-500 mt-1"></p>
+ </section>
+ <section>
+  <h2 class="font-bold mb-1">3. 教科・テスト範囲</h2>
+  <div id="subs" class="space-y-2"></div>
+  <p class="text-xs text-slate-500 mt-1">教科ごとにテスト日が違う場合は、教科の日付を変えてください。</p>
+ </section>
+ <section>
+  <h2 class="font-bold mb-1">4. 点数</h2>
+  <label class="flex items-center gap-2">満点 <input type="number" id="max" value="100" min="1" class="w-20 border rounded px-1 py-1"> 点</label>
+  <div class="flex items-center gap-2 mt-1"><label class="flex gap-2"><input type="checkbox" id="pass" checked> 合格点を表示</label>
+   <input type="number" id="passScore" value="90" min="0" class="w-20 border rounded px-1 py-1"> 点</div>
+  <p class="text-xs text-slate-500">自己ベスト（目標点）の書きこみ欄は常に表示されます。</p>
+ </section>
+ <section>
+  <h2 class="font-bold mb-1">5. 作戦メニュー</h2>
+  <label class="flex gap-2"><input type="checkbox" id="free" checked> 自由記述欄（50〜60字）を入れる</label>
+ </section>
+ <button onclick="window.print()" class="w-full bg-slate-800 text-white font-bold rounded py-2">印刷 / PDF保存</button>
+ <p id="hint" class="text-xs text-slate-500">印刷設定：倍率100%、余白「なし」、「背景のグラフィック」ON。A4/B5は両面印刷（短辺とじ）にすると表裏が合います。</p>
+</aside>
+<main id="preview" class="flex-1 min-w-0 p-4"></main>
+</div>
+<script>
+const SN=['国語','算数','理科','社会','漢字'];
+const C={国語:{c:'#d9443f',t:'#fdecea'},算数:{c:'#2b6cc4',t:'#e8f0fc'},理科:{c:'#2a9456',t:'#e6f5ec'},社会:{c:'#dd841a',t:'#fdf1df'},漢字:{c:'#8247bd',t:'#f1e9fa'}};
+const P={A4:[297,210],B5:[257,182],B4:[364,257]};
+const OPT=[['ひたすら練習作戦','ノートに順番に問題を解きまくる'],['テストまちがい特訓作戦','間違えた問題だけ集中的に直す'],['友達・家族と問題出し合い作戦','家族や友達と問題出し合いっこ'],['まちがえる部分注目作戦','まちがえやすい部分にしるしをつけて集中して見る']];
+const WD='日月火水木金土';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pd=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c)};
+const ds=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const md=d=>`${d.getMonth()+1}/${d.getDate()}`, wd=d=>WD[d.getDay()];
+const add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const t0=new Date();
+const S={paper:'B5',single:false,start:ds(t0),test:ds(add(t0,9)),max:100,pass:true,passScore:90,free:true,
+ subs:Object.fromEntries(SN.map(n=>[n,{on:n==='算数'||n==='漢字',date:'',range:''}]))};
+$('start').value=S.start;$('test').value=S.test;
+
+function subjPanel(){
+ $('subs').innerHTML=SN.map(n=>{const s=S.subs[n];
+  return `<div class="border rounded p-2"><label class="flex items-center gap-2 font-bold"><input type="checkbox" data-sub="${n}" ${s.on?'checked':''}><span style="color:${C[n].c}">${n}</span></label>`+
+  (s.on?`<div class="mt-1 grid grid-cols-2 gap-1 text-xs"><label>テスト日<input type="date" data-sd="${n}" value="${s.date||S.test}" class="w-full border rounded px-1 py-0.5"></label><label>範囲<input type="text" data-sr="${n}" value="${esc(s.range)}" placeholder="p.20〜35 など" class="w-full border rounded px-1 py-0.5"></label></div>`:'')+`</div>`}).join('');
+}
+$('panel').addEventListener('input',e=>{
+ const t=e.target;
+ if(t.name==='paper')S.paper=t.value;
+ else if(t.id==='single')S.single=t.checked;
+ else if(t.id==='start')S.start=t.value||S.start;
+ else if(t.id==='test'){if(t.value){S.test=t.value;SN.forEach(n=>S.subs[n].date='');subjPanel();}}
+ else if(t.id==='max')S.max=Math.max(1,+t.value||100);
+ else if(t.id==='pass')S.pass=t.checked;
+ else if(t.id==='passScore')S.passScore=+t.value||0;
+ else if(t.id==='free')S.free=t.checked;
+ else if(t.dataset.sub){S.subs[t.dataset.sub].on=t.checked;subjPanel();}
+ else if(t.dataset.sd){if(t.value)S.subs[t.dataset.sd].date=t.value;}
+ else if(t.dataset.sr)S.subs[t.dataset.sr].range=t.value;
+ render();
+});
+window.addEventListener('resize',fit);
+
+const chip=n=>`<span class="chip" style="background:${C[n].t};border-left:.3em solid ${C[n].c}">${n}</span>`;
+const sec=(no,title,sub,body,cls='',st='')=>`<div class="sec ${cls}" style="${st}"><h3>${no?`<b class="no">${no}</b>`:''}${title}${sub?`<small>${sub}</small>`:''}</h3>${body}</div>`;
+const lines=(n,st='')=>`<div class="lns" style="--n:${n};${st}">${'<i></i>'.repeat(n)}</div>`;
+const grid=(c,r)=>`<div class="cg" style="--c:${c};--r:${r}">${'<i></i>'.repeat(c*r)}</div>`;
+const hd=(tag,t,sub)=>`<header class="hd"><span class="tag">${tag}</span><h2>${t}</h2><small>${sub}</small><span class="nm">名前<i></i></span></header>`;
+
+function render(){
+ const sel=SN.filter(n=>S.subs[n].on), k=sel.length;
+ const [W,H]=P[S.paper], spread=S.paper==='B4'||S.single;
+ $('single').disabled=S.paper==='B4';
+ const pw=spread?W/2:W, narrow=pw<200;
+ let fs=spread?Math.max(8,pw/19):pw/24.5;
+ fs*=k>=5?.9:k===4?.95:1;
+ const pad=spread?6:8;
+ $('pg').textContent=`@page{size:${W}mm ${H}mm;margin:0}`;
+ const pv=$('preview');
+ if(!k){pv.innerHTML='<p class="p-8 text-center text-slate-600">教科を1つ以上選んでください。</p>';return;}
+ const sd=n=>S.subs[n].date||S.test;
+ let end=new Date(Math.max(...[S.test,...sel.map(sd)].map(x=>+pd(x))));
+ let st=pd(S.start); if(st>end)st=end;
+ let n=Math.round((end-st)/864e5)+1;
+ if(n>14){st=add(end,-13);n=14;}
+ $('days').textContent=`${n}日間のシートを作成中`+((Math.round((end-pd(S.start))/864e5)+1)>14?'（最大14日。テスト日から14日前までを表示）':'');
+ const days=[...Array(n)].map((_,i)=>add(st,i));
+ const rh=k<=2?'3.4em':k===3?'3em':'2.6em';
+ const mrow=m=>`grid-template-rows:auto repeat(${k},minmax(${m},1fr))`;
+ const rrow=m=>`grid-template-rows:repeat(${k},minmax(${m},1fr))`;
+
+ /* ===== 表面 ===== */
+ const s1=sec(1,'教科・テスト日・目標点','',`<div class="g" style="grid-template-columns:4.2em 1fr 4.8em;${mrow(rh)}"><div class="h">教科</div><div class="h">テスト日・満点${S.pass?'・合格点':''}</div><div class="h">目標点<br>(自己ベスト)</div>${
+  sel.map(x=>{const d=pd(sd(x));return `<div>${chip(x)}</div><div><b>${md(d)}(${wd(d)})</b><small>満点${S.max}点${S.pass?`／合格${S.passScore}点`:''}</small></div><div class="end">点</div>`}).join('')}</div>`,'s1');
+ const s2=sec(2,'作戦メニュー','やってみる作戦に ✓',`<div class="ops">${OPT.map(o=>`<div class="opt"><span class="cb"></span><div><b>${o[0]}</b><small>${o[1]}</small></div></div>`).join('')}</div>`+
+  (S.free?`<div class="fh">自分に合った覚え方・その他<small>（50〜60字で書こう）</small></div>${lines(4,'min-height:9.5em')}`:''),'s2');
+ const s3=sec(3,'テスト範囲','ページ・単元名',`<div class="g" style="grid-template-columns:4.2em 1fr;${rrow(rh)}">${sel.map(x=>`<div>${chip(x)}</div><div class="l">${esc(S.subs[x].range)}</div>`).join('')}</div>`,'s3');
+ let cols;
+ if(narrow){const rows=Math.ceil(n/4);cols=Math.ceil(n/rows);}else cols=n<=5?n:Math.ceil(n/2);
+ const plan=sec(4,'学習計画表','テスト範囲から選んで予定を箇条書きで書き込み、計画通り進んだら◯をつけよう',
+  `<div class="days" style="grid-template-columns:repeat(${cols},minmax(0,1fr))">${days.map(d=>{
+   const t=sel.filter(x=>sd(x)===ds(d));
+   return `<div class="day${t.length?' t':''}"><div class="dh ${d.getDay()===0?'sun':d.getDay()===6?'sat':''}">${md(d)}<small>(${wd(d)})</small></div><div class="db">${t.length?t.map(chip).join('')+'<b style="width:100%">テスト本番！</b>':''}</div>${t.length?'':'<div class="df">できたら<i class="ring"></i></div>'}</div>`}).join('')}</div>`,'','flex:1');
+ const front=`<section class="page ${narrow?'narrow':''}" style="font-size:${fs}pt;--pad:${pad}mm">${hd('おもて','テスト勉強シート','作戦と計画')}<div class="top">${s1}${s2}${s3}</div>${plan}</section>`;
+
+ /* ===== 裏面 ===== */
+ const gc=`4.4em repeat(${n},minmax(0,1fr))`;
+ const isT=d=>sel.some(x=>sd(x)===ds(d));
+ const rec=sec(5,'日々の記録 ＆ 定着度','勉強した日に「正」の字を1画ずつ書き足し、その日の定着度を◯でかこもう（× 要特訓 ／ △ まだあやしい ／ 〇 バッチリ）',
+  `<div class="g" style="grid-template-columns:${gc};${mrow('0px')}"><div class="h">教科</div>${days.map(d=>`<div class="h ${isT(d)?'gy':''}">${md(d)}<small>(${wd(d)})</small></div>`).join('')}${
+  sel.map(x=>`<div>${chip(x)}</div>${days.map(d=>isT(d)?'<div class="gy"></div>':'<div class="rc"><span class="tl"></span><span class="mk"><i>×</i><i>△</i><i>〇</i></span></div>').join('')}`).join('')}</div>`,'',`flex:${(1.2+.75*k).toFixed(2)}`);
+ const weak=sec(6,'自分の強化ポイント','まちがえやすい問題・気をつけたいことをメモしよう',lines(narrow?9:7),'','flex:1.5');
+ const res=sec(7,'テスト結果','',`<div class="g" style="grid-template-columns:4.2em 1fr;${rrow('0px')}">${sel.map(x=>`<div>${chip(x)}</div><div class="rs"><div><span class="bl"></span>／${S.max}点${S.pass?`<small style="width:auto;margin-left:.4em">合格${S.passScore}</small>`:''}</div><div class="sat"><span>満足度</span>${[1,2,3,4,5].map(v=>`<i>${v}</i>`).join('')}<span>(5=大満足)</span></div></div>`).join('')}</div>`,'','flex:1');
+ const rcols=narrow?16:25, rrows=narrow?9:5;
+ const refl=sec(8,'ふり返り','テストを受けて分かったこと・次にがんばりたいことを書こう（120〜150字）',lines(narrow?10:5),'','flex:1');
+ const sign=sec('','保護者サイン・コメント','',lines(narrow?7:5)+'<div class="sg">サイン<i></i></div>','',`width:${narrow?'9.5em':'14em'};flex:none`);
+ const back=`<section class="page ${narrow?'narrow':''}" style="font-size:${fs}pt;--pad:${pad}mm">${hd('うら','テスト勉強シート','記録とふり返り')}${rec}<div class="row" style="flex:2">${weak}${res}</div><div class="row" style="flex:1.7">${refl}${sign}</div></section>`;
+
+ const sheets=spread?[`<div class="sheet spread">${front}${back}</div>`]:[front,back].map(p=>`<div class="sheet">${p}</div>`);
+ pv.innerHTML=sheets.map(s=>`<div class="sheet-wrap">${s}</div>`).join('');
+ pv.style.setProperty('--w',W+'mm');pv.style.setProperty('--h',H+'mm');
+ document.documentElement.style.setProperty('--w',W+'mm');document.documentElement.style.setProperty('--h',H+'mm');
+ fit();
+}
+function fit(){
+ const [W]=P[S.paper], pv=$('preview');
+ const avail=pv.clientWidth-32;
+ const s=Math.min(1,avail/(W*3.7795));
+ document.documentElement.style.setProperty('--s',Math.max(.2,s));
+}
+subjPanel();render();
+</script>
+</body>
+</html>
