@@ -12,8 +12,10 @@
 body{font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN','BIZ UDPGothic','Meiryo',sans-serif;background:#e2e8f0}
 .sheet-wrap{width:calc(var(--w)*var(--s));height:calc(var(--h)*var(--s));margin:0 auto 18px;box-shadow:0 2px 10px rgba(0,0,0,.25);background:#fff}
 .sheet{width:var(--w);height:var(--h);transform:scale(var(--s));transform-origin:0 0;background:#fff;display:flex;overflow:hidden;color:#222;box-sizing:border-box}
-.page{flex:1;min-width:0;display:flex;flex-direction:column;gap:.6em;padding:var(--pad);box-sizing:border-box;line-height:1.3}
+.nw{white-space:nowrap}.sec>h3.nw{flex-wrap:nowrap}ruby{ruby-align:center}rt{font-size:.5em;font-weight:400;line-height:1}
+.page{word-break:keep-all;overflow-wrap:normal;flex:1;min-width:0;display:flex;flex-direction:column;gap:.6em;padding:var(--pad);box-sizing:border-box;line-height:1.3}
 .spread .page+.page{border-left:1px dashed #999}
+.sheet.col{flex-direction:column}.col .page+.page{border-left:0;border-top:1px dashed #999}
 .hd{display:flex;align-items:center;gap:.6em;border-bottom:3px solid #1f3a5f;padding-bottom:.25em}
 .hd h2{font-size:1.65em;font-weight:900;color:#1f3a5f;margin:0}
 .hd small{color:#555}
@@ -24,7 +26,7 @@ body{font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN','BIZ UDPGothic','
 .sec>h3{font-weight:900;font-size:1.05em;margin:0 0 .3em;display:flex;gap:.4em;align-items:baseline;flex-wrap:wrap}
 .sec>h3 small{font-weight:400;font-size:.78em;color:#444}
 .no{display:inline-grid;place-items:center;width:1.4em;height:1.4em;border-radius:50%;background:#1f3a5f;color:#fff;font-size:.85em}
-.chip{display:inline-block;min-width:3em;text-align:center;font-weight:900;border-radius:.35em;padding:.1em .35em;margin:.05em}
+.chip{white-space:nowrap;display:inline-block;min-width:3em;text-align:center;font-weight:900;border-radius:.35em;padding:.1em .35em;margin:.05em}
 .g{display:grid;flex:1;min-height:0;border-top:1px solid #555;border-left:1px solid #555}
 .g>div{border-right:1px solid #555;border-bottom:1px solid #555;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;align-content:center;text-align:center;padding:.1em .3em;min-width:0;overflow:hidden;line-height:1.25}
 .g>.h{background:#eef1f5;font-size:.8em;font-weight:700}
@@ -36,8 +38,8 @@ body{font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN','BIZ UDPGothic','
 .top>.s1{flex:1.05}.top>.s2{flex:1.8}.top>.s3{flex:.75}
 .narrow .top{display:grid;grid-template-columns:1fr 1fr}
 .narrow .s1{grid-area:1/1}.narrow .s3{grid-area:2/1}.narrow .s2{grid-area:1/2/3/3}
-.ops{flex:none;display:flex;flex-direction:column;gap:.3em}
-.opt{display:flex;gap:.45em;align-items:center}
+.ops{flex:none;display:flex;flex-direction:column;gap:.3em}.ops.w2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.3em .6em}
+.opt{display:flex;gap:.45em;align-items:center;min-width:0;overflow:hidden}
 .opt b{font-size:.92em}.opt small{display:block;font-size:.72em;color:#444;line-height:1.2}
 .cb{width:1.25em;height:1.25em;border:2px solid #333;border-radius:.25em;flex:none}
 .fh{font-weight:900;font-size:.9em;margin:.3em 0 .15em;border-top:1px dashed #888;padding-top:.3em}
@@ -46,16 +48,16 @@ body{font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN','BIZ UDPGothic','
 .cg i{border-right:1px solid #555;border-bottom:1px solid #555}
 .days{display:grid;gap:.4em;flex:1;min-height:0;grid-auto-rows:minmax(0,1fr)}
 .day{border:1.3px solid #555;border-radius:.4em;display:flex;flex-direction:column;overflow:hidden;min-height:0;min-width:0}
-.dh{background:#eef1f5;text-align:center;font-weight:900;padding:.1em;border-bottom:1px solid #555}
+.dh{background:#eef1f5;text-align:center;font-weight:900;padding:.1em;border-bottom:1px solid #555;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:2.8em;white-space:nowrap}
 .dh small{font-size:.75em;margin-left:.15em}.sun small{color:#d33}.sat small{color:#27c}
-.db{flex:1;min-height:0;padding:.2em;font-size:.8em}.day.t .db{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;align-content:center;text-align:center;font-size:.9em}
+.db{flex:1;min-height:0;padding:.2em .3em;font-size:.9em;display:flex;flex-direction:column}.day.t .db{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;align-content:center;text-align:center}.pls{flex:none;display:flex;flex-direction:column;gap:.15em}.pl{display:flex;align-items:center;gap:.3em;height:2.1em}.tt{min-height:1.3em;font-size:.72em;display:flex;gap:.15em;align-items:center;justify-content:center;font-weight:700}.tt .chip{min-width:0;padding:0 .3em;margin:0}.pl i{width:1.2em;height:1.2em;border:1.5px solid #333;border-radius:.2em;flex:none}.rg{gap:.15em .3em}.ri{white-space:nowrap;background:#f1f3f6;border-radius:.3em;padding:0 .4em}
 .df{display:flex;justify-content:flex-end;align-items:center;gap:.3em;padding:.15em .3em;font-size:.72em;color:#444}
 .ring{display:inline-block;width:1.9em;height:1.9em;border:1.5px solid #333;border-radius:50%}
 .day.t{border-width:2px;border-color:#1f3a5f}.day.t .dh{background:#1f3a5f;color:#fff}
 .ret{gap:.3em;flex-wrap:nowrap!important}
 .ret i{font-style:normal;width:1.8em;height:1.8em;border:1.3px solid #666;border-radius:50%;display:inline-grid;place-items:center;font-weight:900}
-.lns{flex:1;min-height:0;display:grid;grid-template-rows:repeat(var(--n),minmax(0,1fr))}.lns i{border-bottom:1px solid #888}.g>.rc{flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:stretch;padding:0}.rc .tl{flex:1}.mk{display:flex;flex-wrap:wrap;justify-content:space-around;gap:.1em;border-top:1px dashed #888;padding:.15em 0;font-size:.62em}.mk i,.sat i{font-style:normal;width:1.6em;height:1.6em;border:1px solid #555;border-radius:50%;display:inline-grid;place-items:center;font-weight:900;line-height:1}.g>.rs{flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:space-evenly}.rs>div{display:flex;align-items:center;gap:.25em}.sat{font-size:.85em}.sat span{font-size:.8em;color:#444}.sat i{width:1.7em;height:1.7em;font-size:.95em}
-.bl{flex:1;border-bottom:1px solid #666;height:1.4em;margin-right:.3em}
+.lns{flex:1;min-height:0;display:grid;align-content:start;overflow:hidden}.lns i{border-bottom:1px solid #888}.g>.rc{flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:stretch;padding:0}.rc .tl{flex:1}.mk{display:flex;flex-wrap:wrap;justify-content:space-around;gap:.1em;border-top:1px dashed #888;padding:.15em 0;font-size:.8em}.mk i,.sat i{font-style:normal;font-weight:900;line-height:1.3;padding:0 .1em}.g>.rs{flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:space-evenly}.rs>div{display:flex;align-items:center;gap:.25em}.g>.rs.in{flex-direction:row;align-items:center;justify-content:flex-start;gap:.4em}.rs.in>div:first-child{flex:1 1 0;min-width:0}.rs.in .sat{flex:none}.rs.in .sat span:last-child{display:none}.sat{font-size:.85em}.sat span{font-size:.8em;color:#444}.sat i{font-size:1em;padding:0 .45em}
+.bl{min-width:1.5em;flex:1;border-bottom:1px solid #666;height:1.4em;margin-right:.3em}
 .row{display:flex;gap:.6em;min-height:0}
 .sg{display:flex;align-items:flex-end;gap:.3em;font-weight:700;font-size:.9em;padding-top:.2em}
 .sg i{flex:1;border-bottom:1.5px solid #333;height:1.4em}
@@ -74,14 +76,25 @@ body{font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN','BIZ UDPGothic','
 <aside id="panel" class="lg:w-80 lg:shrink-0 lg:h-screen lg:overflow-y-auto lg:sticky lg:top-0 bg-white p-4 space-y-4 text-sm shadow">
  <h1 class="text-lg font-black text-slate-800">テスト勉強シートメーカー</h1>
  <section>
+  <h2 class="font-bold mb-1">0. 学年</h2>
+  <div class="space-y-1">
+   <label class="flex gap-2"><input type="radio" name="grade" value="low"> 低学年（2年生までの漢字・ふりがなは2年／罫線の行間15mm）</label>
+   <label class="flex gap-2"><input type="radio" name="grade" value="mid"> 中学年（4年生までの漢字・ふりがなは4年／行間12mm）</label>
+   <label class="flex gap-2"><input type="radio" name="grade" value="high" checked> 高学年（小学校の全漢字・ふりがなは6年／行間10mm）</label>
+  </div>
+  <p class="text-xs text-slate-500">保護者コメント欄の行間は常に10mmです。</p>
+ </section>
+ <section>
   <h2 class="font-bold mb-1">1. 用紙サイズ・レイアウト</h2>
   <div class="space-y-1" id="paper">
    <label class="flex gap-2"><input type="radio" name="paper" value="A4"> A4 横（裏表）</label>
+   <label class="flex gap-2"><input type="radio" name="paper" value="A4T"> A4 縦（裏表）</label>
    <label class="flex gap-2"><input type="radio" name="paper" value="B5" checked> B5 横（裏表）</label>
    <label class="flex gap-2"><input type="radio" name="paper" value="B4"> B4 横（見開き：左=表／右=裏）</label>
+   <label class="flex gap-2"><input type="radio" name="paper" value="B4T"> B4 縦（表のみ：上=おもて／下=うら）</label>
   </div>
   <label class="flex gap-2 mt-2"><input type="checkbox" id="single"> 裏面を使わず片面に収める</label>
-  <p class="text-xs text-slate-500">教科が少ないときに便利です。表と裏を1枚の左右に並べます（B4は常に見開き）。</p>
+  <p class="text-xs text-slate-500">教科が少ないときに便利です。表と裏を1枚にまとめます（横は左右、縦は上下。B4は常に1面にまとめます）。</p>
  </section>
  <section>
   <h2 class="font-bold mb-1">2. テスト期間</h2>
@@ -94,7 +107,7 @@ body{font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN','BIZ UDPGothic','
  <section>
   <h2 class="font-bold mb-1">3. 教科・テスト範囲</h2>
   <div id="subs" class="space-y-2"></div>
-  <p class="text-xs text-slate-500 mt-1">教科ごとにテスト日が違う場合は、教科の日付を変えてください。</p>
+  <p class="text-xs text-slate-500 mt-1">範囲は「p.20〜35」「第3単元」のように1つずつ追加します（Enterでも追加）。1つのまとまりはシート上で途中改行されません。教科ごとにテスト日が違う場合は教科の日付を変えてください。</p>
  </section>
  <section>
   <h2 class="font-bold mb-1">4. 点数</h2>
@@ -115,8 +128,22 @@ body{font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN','BIZ UDPGothic','
 <script>
 const SN=['国語','算数','理科','社会','漢字'];
 const C={国語:{c:'#d9443f',t:'#fdecea'},算数:{c:'#2b6cc4',t:'#e8f0fc'},理科:{c:'#2a9456',t:'#e6f5ec'},社会:{c:'#dd841a',t:'#fdf1df'},漢字:{c:'#8247bd',t:'#f1e9fa'}};
-const P={A4:[297,210],B5:[257,182],B4:[364,257]};
-const OPT=[['ひたすら練習作戦','ノートに順番に問題を解きまくる'],['テストまちがい特訓作戦','間違えた問題だけ集中的に直す'],['友達・家族と問題出し合い作戦','家族や友達と問題出し合いっこ'],['まちがえる部分注目作戦','まちがえやすい部分にしるしをつけて集中して見る']];
+const P={A4:[297,210,'two'],A4T:[210,297,'two'],B5:[257,182,'two'],B4:[364,257,'row'],B4T:[257,364,'col']};
+const OPT=[
+['ひたすら練習《れんしゅう》作戦《さくせん》','ノートに順番《じゅんばん》に¦問題《もんだい》を¦解《と》きまくる'],
+['テストまちがい¦特訓《とっくん》作戦《さくせん》','間違《まちが》えた問題《もんだい》だけ¦集中的《しゅうちゅうてき》に¦直《なお》す'],
+['友達《ともだち》・家族《かぞく》と¦問題《もんだい》出《だ》し合《あ》い作戦《さくせん》','家族《かぞく》や友達《ともだち》と¦問題《もんだい》出《だ》し合《あ》いっこ'],
+['まちがえる部分《ぶぶん》¦注目《ちゅうもく》作戦《さくせん》','まちがえやすい部分《ぶぶん》に¦しるしをつけて¦集中《しゅうちゅう》して見《み》る']];
+const KG=['一右雨円王音下火花貝学気九休玉金空月犬見五口校左三山子四糸字耳七車手十出女小上森人水正生青夕石赤千川先早草足村大男竹中虫町天田土二日入年白八百文木本名目立力林六',
+'引羽雲園遠何科夏家歌画回会海絵外角楽活間丸岩顔汽記帰弓牛魚京強教近兄形計元言原戸古午後語工公広交光考行高黄合谷国黒今才細作算止市矢姉思紙寺自時室社弱首秋週春書少場色食心新親図数西声星晴切雪船線前組走多太体台地池知茶昼長鳥朝直通弟店点電刀冬当東答頭同道読内南肉馬売買麦半番父風分聞米歩母方北毎妹万明鳴毛門夜野友用曜来里理話',
+'悪安暗医委意育員院飲運泳駅央横屋温化荷界開階寒感漢館岸起期客究急級宮球去橋業曲局銀区苦具君係軽血決研県庫湖向幸港号根祭皿仕死使始指歯詩次事持式実写者主守取酒受州拾終習集住重宿所暑助昭消商章勝乗植申身神真深進世整昔全相送想息速族他打対待代第題炭短談着注柱丁帳調追定庭笛鉄転都度投豆島湯登等動童農波配倍箱畑発反坂板皮悲美鼻筆氷表秒病品負部服福物平返勉放味命面問役薬由油有遊予羊洋葉陽様落流旅両緑礼列練路和',
+'愛案以衣位茨印英栄媛塩岡億加果貨課芽賀改械害街各覚潟完官管関観願岐希季旗器機議求泣給挙漁共協鏡競極熊訓軍郡群径景芸欠結建健験固功好香候康佐差菜最埼材崎昨札刷察参産散残氏司試児治滋辞鹿失借種周祝順初松笑唱焼象照賞臣信成省清静席積折節説浅戦選然争倉巣束側続卒孫帯隊達単置仲貯兆腸低底停的典伝徒努灯堂働特得毒熱念敗梅博飯飛費必標票不夫付府副粉兵別辺変便包法望牧末満未脈民無約勇要養浴利陸良料量輪類令冷例歴連老労録',
+'圧移因永営衛易益液演応往桜可仮価河過快解格確額刊幹慣眼紀基寄規喜技義逆久旧居許境均禁句経潔件券検険減現限個故護効厚耕航鉱構興講混査再災妻採際在財罪雑酸賛支志枝師資飼示似識質舎謝授修述術準序招証条状常情織職制性政勢精製税責績接設絶祖素総造像増則測属率損貸態団断築張提程適統銅導独任燃能破犯判版比肥非備俵評貧布婦富武復複仏編弁保墓報豊暴貿防務夢迷綿輸余預容略留領',
+'異遺域宇映延沿我灰拡革閣割株干巻看簡危机揮貴疑吸供胸郷勤筋系敬警劇激穴絹権憲源厳己呼誤后孝皇紅降鋼刻穀骨困砂座済裁策冊蚕至私姿視詞誌磁射捨尺若樹収宗就衆従縦縮熟純処署諸除承将傷障蒸針仁垂推寸盛聖誠宣専泉洗染善奏窓創装層操蔵臓存尊宅担探段暖値宙忠著庁頂潮賃痛展討党糖届難乳認納脳派拝背肺俳班晩否批秘腹奮並陛閉片補暮宝訪亡忘棒枚幕密盟模訳郵優幼欲翌乱卵覧裏律臨朗論'];
+const G={};KG.forEach((t,i)=>[...t].forEach(c=>G[c]=i+1));
+let LIM=6;
+const rb=t=>t.replace(/([一-龠々]+)《([^》]+)》/g,(m,b,r)=>{const gs=[...b].filter(c=>c!=='々').map(c=>G[c]||9);if(Math.max(...gs)>LIM)return r;return gs.includes(LIM)?`<ruby>${b}<rt>${r}</rt></ruby>`:b}).replace(/¦/g,'<wbr>');
+const SJ={国語:'国語《こくご》',算数:'算数《さんすう》',理科:'理科《りか》',社会:'社会《しゃかい》',漢字:'漢字《かんじ》'};
 const WD='日月火水木金土';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -125,18 +152,19 @@ const ds=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+Strin
 const md=d=>`${d.getMonth()+1}/${d.getDate()}`, wd=d=>WD[d.getDay()];
 const add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
 const t0=new Date();
-const S={paper:'B5',single:false,start:ds(t0),test:ds(add(t0,9)),max:100,pass:true,passScore:90,free:true,
- subs:Object.fromEntries(SN.map(n=>[n,{on:n==='算数'||n==='漢字',date:'',range:''}]))};
+const S={grade:'high',paper:'B5',single:false,start:ds(t0),test:ds(add(t0,9)),max:100,pass:true,passScore:90,free:true,
+ subs:Object.fromEntries(SN.map(n=>[n,{on:n==='算数'||n==='漢字',date:'',items:[]}]))};
 $('start').value=S.start;$('test').value=S.test;
 
 function subjPanel(){
  $('subs').innerHTML=SN.map(n=>{const s=S.subs[n];
   return `<div class="border rounded p-2"><label class="flex items-center gap-2 font-bold"><input type="checkbox" data-sub="${n}" ${s.on?'checked':''}><span style="color:${C[n].c}">${n}</span></label>`+
-  (s.on?`<div class="mt-1 grid grid-cols-2 gap-1 text-xs"><label>テスト日<input type="date" data-sd="${n}" value="${s.date||S.test}" class="w-full border rounded px-1 py-0.5"></label><label>範囲<input type="text" data-sr="${n}" value="${esc(s.range)}" placeholder="p.20〜35 など" class="w-full border rounded px-1 py-0.5"></label></div>`:'')+`</div>`}).join('');
+  (s.on?`<div class="mt-1 text-xs space-y-1"><label class="block">テスト日<input type="date" data-sd="${n}" value="${s.date||S.test}" class="w-full border rounded px-1 py-0.5"></label><div>テスト範囲（1つずつ追加）</div><div class="flex gap-1"><input type="text" data-si="${n}" placeholder="例：p.20〜35" class="flex-1 min-w-0 border rounded px-1 py-1"><button type="button" data-add="${n}" class="bg-slate-700 text-white rounded px-2">追加</button></div><div class="flex flex-wrap gap-1">${s.items.map((it,i)=>`<span class="inline-flex items-center gap-1 bg-slate-100 border rounded px-1.5 py-0.5 whitespace-nowrap">${esc(it)}<button type="button" data-del="${n}:${i}" aria-label="削除" class="text-slate-500">×</button></span>`).join('')}</div></div>`:'')+`</div>`}).join('');
 }
 $('panel').addEventListener('input',e=>{
  const t=e.target;
- if(t.name==='paper')S.paper=t.value;
+ if(t.name==='grade')S.grade=t.value;
+ else if(t.name==='paper')S.paper=t.value;
  else if(t.id==='single')S.single=t.checked;
  else if(t.id==='start')S.start=t.value||S.start;
  else if(t.id==='test'){if(t.value){S.test=t.value;SN.forEach(n=>S.subs[n].date='');subjPanel();}}
@@ -146,23 +174,29 @@ $('panel').addEventListener('input',e=>{
  else if(t.id==='free')S.free=t.checked;
  else if(t.dataset.sub){S.subs[t.dataset.sub].on=t.checked;subjPanel();}
  else if(t.dataset.sd){if(t.value)S.subs[t.dataset.sd].date=t.value;}
- else if(t.dataset.sr)S.subs[t.dataset.sr].range=t.value;
+ else if(t.dataset.si)return;
  render();
 });
+function addItem(n){const el=document.querySelector(`[data-si="${n}"]`);const v=el.value.split(/[、，,\n]/).map(x=>x.trim()).filter(Boolean);if(!v.length)return;S.subs[n].items.push(...v);subjPanel();document.querySelector(`[data-si="${n}"]`).focus();render();}
+$('panel').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.add)addItem(b.dataset.add);else if(b.dataset.del){const[n,i]=b.dataset.del.split(':');S.subs[n].items.splice(+i,1);subjPanel();render();}});
+$('panel').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing&&e.target.dataset.si){e.preventDefault();addItem(e.target.dataset.si);}});
 window.addEventListener('resize',fit);
 
-const chip=n=>`<span class="chip" style="background:${C[n].t};border-left:.3em solid ${C[n].c}">${n}</span>`;
-const sec=(no,title,sub,body,cls='',st='')=>`<div class="sec ${cls}" style="${st}"><h3>${no?`<b class="no">${no}</b>`:''}${title}${sub?`<small>${sub}</small>`:''}</h3>${body}</div>`;
-const lines=(n,st='')=>`<div class="lns" style="--n:${n};${st}">${'<i></i>'.repeat(n)}</div>`;
-const grid=(c,r)=>`<div class="cg" style="--c:${c};--r:${r}">${'<i></i>'.repeat(c*r)}</div>`;
-const hd=(tag,t,sub)=>`<header class="hd"><span class="tag">${tag}</span><h2>${t}</h2><small>${sub}</small><span class="nm">名前<i></i></span></header>`;
+const chip=n=>`<span class="chip" style="background:${C[n].t};border-left:.3em solid ${C[n].c}">${rb(SJ[n])}</span>`;
+const sec=(no,title,sub,body,cls='',st='')=>`<div class="sec ${cls}" style="${st}"><h3>${no?`<b class="no">${no}</b>`:''}${rb(title)}${sub?`<small>${rb(sub)}</small>`:''}</h3>${body}</div>`;
+const lines=(lh,n)=>`<div class="lns" data-lh="${lh}"${n?` data-n="${n}"`:''}></div>`;
+const hd=(tag,t,sub)=>`<header class="hd"><span class="tag">${rb(tag)}</span><h2>${rb(t)}</h2><small>${rb(sub)}</small><span class="nm">${rb('名前《なまえ》')}<i></i></span></header>`;
 
 function render(){
+ LIM={low:2,mid:4,high:6}[S.grade];
+ const LH={low:15,mid:12,high:10}[S.grade], g=LH/10;
  const sel=SN.filter(n=>S.subs[n].on), k=sel.length;
- const [W,H]=P[S.paper], spread=S.paper==='B4'||S.single;
- $('single').disabled=S.paper==='B4';
- const pw=spread?W/2:W, narrow=pw<200;
- let fs=spread?Math.max(8,pw/19):pw/24.5;
+ const [W,H,m0]=P[S.paper]; let mode=m0;
+ if(mode==='two'&&S.single)mode=W>H?'row':'col';
+ const spread=mode!=='two';
+ $('single').disabled=m0!=='two';
+ const pw=mode==='row'?W/2:W, ph=mode==='col'?H/2:H, narrow=pw<ph*1.1;
+ let fs=narrow?Math.max(8,pw/19):pw/24.5;
  fs*=k>=5?.9:k===4?.95:1;
  const pad=spread?6:8;
  $('pg').textContent=`@page{size:${W}mm ${H}mm;margin:0}`;
@@ -175,42 +209,41 @@ function render(){
  if(n>14){st=add(end,-13);n=14;}
  $('days').textContent=`${n}日間のシートを作成中`+((Math.round((end-pd(S.start))/864e5)+1)>14?'（最大14日。テスト日から14日前までを表示）':'');
  const days=[...Array(n)].map((_,i)=>add(st,i));
- const rh=k<=2?'3.4em':k===3?'3em':'2.6em';
+ const rh='2.5em';
  const mrow=m=>`grid-template-rows:auto repeat(${k},minmax(${m},1fr))`;
  const rrow=m=>`grid-template-rows:repeat(${k},minmax(${m},1fr))`;
 
  /* ===== 表面 ===== */
- const s1=sec(1,'教科・テスト日・目標点','',`<div class="g" style="grid-template-columns:4.2em 1fr 4.8em;${mrow(rh)}"><div class="h">教科</div><div class="h">テスト日・満点${S.pass?'・合格点':''}</div><div class="h">目標点<br>(自己ベスト)</div>${
-  sel.map(x=>{const d=pd(sd(x));return `<div>${chip(x)}</div><div><b>${md(d)}(${wd(d)})</b><small>満点${S.max}点${S.pass?`／合格${S.passScore}点`:''}</small></div><div class="end">点</div>`}).join('')}</div>`,'s1');
- const s2=sec(2,'作戦メニュー','やってみる作戦に ✓',`<div class="ops">${OPT.map(o=>`<div class="opt"><span class="cb"></span><div><b>${o[0]}</b><small>${o[1]}</small></div></div>`).join('')}</div>`+
-  (S.free?`<div class="fh">自分に合った覚え方・その他<small>（50〜60字で書こう）</small></div>${lines(4,'min-height:9.5em')}`:''),'s2');
- const s3=sec(3,'テスト範囲','ページ・単元名',`<div class="g" style="grid-template-columns:4.2em 1fr;${rrow(rh)}">${sel.map(x=>`<div>${chip(x)}</div><div class="l">${esc(S.subs[x].range)}</div>`).join('')}</div>`,'s3');
+ const s1=sec(1,'教科《きょうか》・テスト日・目標点《もくひょうてん》','',`<div class="g" style="grid-template-columns:4.2em 1fr 4.8em;${mrow(rh)}"><div class="h">${rb('教科《きょうか》')}</div><div class="h">${rb('テスト日・満点《まんてん》'+(S.pass?'・合格点《ごうかくてん》':''))}</div><div class="h">${rb('目標点《もくひょうてん》')}<small class="pp">${rb('(自己《じこ》ベスト)')}</small></div>${
+  sel.map(x=>{const d=pd(sd(x));return `<div>${chip(x)}</div><div><b>${md(d)}<span class="pp">(${wd(d)})</span></b><small>${rb('満点《まんてん》'+S.max+'点《てん》'+(S.pass?'／合格《ごうかく》'+S.passScore+'点《てん》':''))}</small></div><div class="end">${rb('点《てん》')}</div>`}).join('')}</div>`,'s1');
+ const s2=sec(2,'作戦《さくせん》メニュー','やってみる作戦《さくせん》に ✓',`<div class="ops${narrow?'':' w2'}">${OPT.map(o=>`<div class="opt"><span class="cb"></span><div><b>${rb(o[0])}</b><small>${rb(o[1])}</small></div></div>`).join('')}</div>`+
+  (S.free?`<div class="fh">${rb('自分《じぶん》に合《あ》った覚《おぼ》え方《かた》・その他《ほか》')}<small>${rb('（50〜60字《じ》で¦書《か》こう）')}</small></div>${lines(LH,2)}`:''),'s2');
+ const s3=sec(3,'テスト範囲《はんい》','ページ・単元《たんげん》名《めい》',`<div class="g" style="grid-template-columns:4.2em 1fr;${rrow(rh)}">${sel.map(x=>`<div>${chip(x)}</div><div class="l rg">${S.subs[x].items.map(i=>`<span class="ri">${esc(i)}</span>`).join('')}</div>`).join('')}</div>`,'s3');
  let cols;
  if(narrow){const rows=Math.ceil(n/4);cols=Math.ceil(n/rows);}else cols=n<=5?n:Math.ceil(n/2);
- const plan=sec(4,'学習計画表','テスト範囲から選んで予定を箇条書きで書き込み、計画通り進んだら◯をつけよう',
+ const plan=sec(4,'学習《がくしゅう》計画表《けいかくひょう》','テスト範囲《はんい》から¦選《えら》んで¦予定《よてい》を¦書《か》き込《こ》み、¦できたものの □ に ✓ を¦つけよう（例《れい》：☑ p.2）。¦足《た》りないときは¦余白《よはく》に □ を¦書《か》き足《た》そう',
   `<div class="days" style="grid-template-columns:repeat(${cols},minmax(0,1fr))">${days.map(d=>{
    const t=sel.filter(x=>sd(x)===ds(d));
-   return `<div class="day${t.length?' t':''}"><div class="dh ${d.getDay()===0?'sun':d.getDay()===6?'sat':''}">${md(d)}<small>(${wd(d)})</small></div><div class="db">${t.length?t.map(chip).join('')+'<b style="width:100%">テスト本番！</b>':''}</div>${t.length?'':'<div class="df">できたら<i class="ring"></i></div>'}</div>`}).join('')}</div>`,'','flex:1');
- const front=`<section class="page ${narrow?'narrow':''}" style="font-size:${fs}pt;--pad:${pad}mm">${hd('おもて','テスト勉強シート','作戦と計画')}<div class="top">${s1}${s2}${s3}</div>${plan}</section>`;
+   const fin=sel.every(x=>sd(x)<=ds(d));
+   return `<div class="day${fin?' t':''}"><div class="dh ${d.getDay()===0?'sun':d.getDay()===6?'sat':''}"><div>${md(d)}<small>(${wd(d)})</small></div><div class="tt">${fin?'':(t.length?'テスト':'')+t.map(chip).join('')}</div></div><div class="db">${fin?t.map(chip).join('')+`<b style="width:100%">${rb('テスト本番《ほんばん》！')}</b>`:'<div class="pls"><div class="pl"><i></i></div><div class="pl"><i></i></div></div>'}</div></div>`}).join('')}</div>`,'','flex:1');
+ const front=`<section class="page ${narrow?'narrow':''}" style="font-size:${fs}pt;--pad:${pad}mm">${hd('おもて','テスト勉強《べんきょう》シート','作戦《さくせん》と計画《けいかく》')}<div class="top">${s1}${s2}${s3}</div>${plan}</section>`;
 
  /* ===== 裏面 ===== */
  const gc=`4.4em repeat(${n},minmax(0,1fr))`;
- const isT=d=>sel.some(x=>sd(x)===ds(d));
- const rec=sec(5,'日々の記録 ＆ 定着度','勉強した日に「正」の字を1画ずつ書き足し、その日の定着度を◯でかこもう（× 要特訓 ／ △ まだあやしい ／ 〇 バッチリ）',
-  `<div class="g" style="grid-template-columns:${gc};${mrow('0px')}"><div class="h">教科</div>${days.map(d=>`<div class="h ${isT(d)?'gy':''}">${md(d)}<small>(${wd(d)})</small></div>`).join('')}${
-  sel.map(x=>`<div>${chip(x)}</div>${days.map(d=>isT(d)?'<div class="gy"></div>':'<div class="rc"><span class="tl"></span><span class="mk"><i>×</i><i>△</i><i>〇</i></span></div>').join('')}`).join('')}</div>`,'',`flex:${(1.2+.75*k).toFixed(2)}`);
- const weak=sec(6,'自分の強化ポイント','まちがえやすい問題・気をつけたいことをメモしよう',lines(narrow?9:7),'','flex:1.5');
- const res=sec(7,'テスト結果','',`<div class="g" style="grid-template-columns:4.2em 1fr;${rrow('0px')}">${sel.map(x=>`<div>${chip(x)}</div><div class="rs"><div><span class="bl"></span>／${S.max}点${S.pass?`<small style="width:auto;margin-left:.4em">合格${S.passScore}</small>`:''}</div><div class="sat"><span>満足度</span>${[1,2,3,4,5].map(v=>`<i>${v}</i>`).join('')}<span>(5=大満足)</span></div></div>`).join('')}</div>`,'','flex:1');
- const rcols=narrow?16:25, rrows=narrow?9:5;
- const refl=sec(8,'ふり返り','テストを受けて分かったこと・次にがんばりたいことを書こう（120〜150字）',lines(narrow?10:5),'','flex:1');
- const sign=sec('','保護者サイン・コメント','',lines(narrow?7:5)+'<div class="sg">サイン<i></i></div>','',`width:${narrow?'9.5em':'14em'};flex:none`);
- const back=`<section class="page ${narrow?'narrow':''}" style="font-size:${fs}pt;--pad:${pad}mm">${hd('うら','テスト勉強シート','記録とふり返り')}${rec}<div class="row" style="flex:2">${weak}${res}</div><div class="row" style="flex:1.7">${refl}${sign}</div></section>`;
+ const rec=sec(5,'日々《ひび》の記録《きろく》 ＆ 定着度《ていちゃくど》','勉強《べんきょう》した日《ひ》に¦「正《せい》」の字《じ》を¦1画《かく》ずつ¦書《か》き足《た》し、¦その日《ひ》の¦定着度《ていちゃくど》を¦◯でかこもう¦（× 要《よう》特訓《とっくん》 ／ △ まだあやしい ／ 〇 バッチリ）',
+  `<div class="g" style="grid-template-columns:${gc};${mrow('0px')}"><div class="h">${rb('教科《きょうか》')}</div>${days.map(d=>`<div class="h">${md(d)}<small>(${wd(d)})</small></div>`).join('')}${
+  sel.map(x=>`<div>${chip(x)}</div>${days.map(d=>sd(x)===ds(d)?'<div class="gy"><small>テスト</small></div>':'<div class="rc"><span class="tl"></span><span class="mk"><i>×</i><i>△</i><i>〇</i></span></div>').join('')}`).join('')}</div>`,'',`flex:${(1.2+.75*k).toFixed(2)}`);
+ const weak=sec(6,'自分《じぶん》の強化《きょうか》ポイント','まちがえやすい問題《もんだい》・¦気《き》をつけたいことをメモしよう',lines(LH),'','flex:1.5');
+ const res=sec(7,'テスト結果《けっか》','',`<div class="g" style="grid-template-columns:4.2em 1fr;${rrow('0px')}">${sel.map(x=>`<div>${chip(x)}</div><div class="rs"><div><span class="bl"></span>／${S.max}${rb('点《てん》')}${S.pass?`<small style="width:auto;margin-left:.4em">${rb('合格《ごうかく》')}${S.passScore}</small>`:''}</div><div class="sat"><span>${rb('満足度《まんぞくど》')}</span>${[1,2,3,4,5].map(v=>`<i>${v}</i>`).join('')}<span>${rb('(5=大満足《だいまんぞく》)')}</span></div></div>`).join('')}</div>`,'','flex:1');
+ const refl=sec(8,'ふり返《かえ》り','テストを受《う》けて¦分《わ》かったこと・¦次《つぎ》にがんばりたいことを¦書《か》こう（120〜150字《じ》）',lines(LH),'','flex:1');
+ const sign=sec('','保護者《ほごしゃ》サイン・コメント','',lines(10)+'<div class="sg">サイン<i></i></div>','',`width:${narrow?'11em':'14em'};flex:none`);
+ const back=`<section class="page ${narrow?'narrow':''}" style="font-size:${fs}pt;--pad:${pad}mm">${hd('うら','テスト勉強《べんきょう》シート','記録《きろく》とふり返《かえ》り')}${rec}<div class="row" style="flex:${(2*g).toFixed(2)}">${weak}${res}</div><div class="row" style="flex:${(1.7*g).toFixed(2)}">${refl}${sign}</div></section>`;
 
- const sheets=spread?[`<div class="sheet spread">${front}${back}</div>`]:[front,back].map(p=>`<div class="sheet">${p}</div>`);
+ const sheets=spread?[`<div class="sheet spread${mode==='col'?' col':''}">${front}${back}</div>`]:[front,back].map(p=>`<div class="sheet">${p}</div>`);
  pv.innerHTML=sheets.map(s=>`<div class="sheet-wrap">${s}</div>`).join('');
  pv.style.setProperty('--w',W+'mm');pv.style.setProperty('--h',H+'mm');
  document.documentElement.style.setProperty('--w',W+'mm');document.documentElement.style.setProperty('--h',H+'mm');
- fit();
+ fit();fitLines();shrink();
 }
 function fit(){
  const [W]=P[S.paper], pv=$('preview');
@@ -218,7 +251,40 @@ function fit(){
  const s=Math.min(1,avail/(W*3.7795));
  document.documentElement.style.setProperty('--s',Math.max(.2,s));
 }
+function fitLines(){
+ document.querySelectorAll('.lns').forEach(c=>{
+  const lh=+c.dataset.lh, fixed=+c.dataset.n;
+  let n=fixed;
+  if(fixed){c.style.flex='none';c.style.height=fixed*lh+'mm';}
+  else{c.innerHTML='';n=Math.max(1,Math.floor(c.clientHeight/(lh*3.7795)));}
+  c.innerHTML='<i></i>'.repeat(n);
+  c.style.gridTemplateRows=`repeat(${n},${lh}mm)`;
+ });
+}
+function shrink(){
+ document.querySelectorAll('.g>div,.dh,.opt,.sec>h3,.fh,.hd,.sg').forEach(c=>{
+  const cl=c.classList;
+  if(cl.contains('rc'))return;
+  const rs=cl.contains('rs'), rg=cl.contains('rg');
+  c.style.fontSize='';cl.remove('nw');
+  const ss=(cl.contains('opt')||rs||rg)?[]:[...c.querySelectorAll('small,.pp')];
+  ss.forEach(x=>x.style.fontSize='');
+  const bad=()=>c.scrollWidth>c.clientWidth+1||c.scrollHeight>c.clientHeight+1;
+  if(rs){cl.remove('in');cl.add('nw');if(bad())cl.add('in');}
+  else if(!rg)cl.add('nw');
+  if(!bad())return;
+  const c0=parseFloat(getComputedStyle(c).fontSize);
+  const b0=ss.map(x=>parseFloat(getComputedStyle(x).fontSize));
+  const run=(minS,minC)=>{let sf=1,cf=1;
+   while(sf>minS&&bad()&&ss.length){sf-=.05;ss.forEach((x,i)=>x.style.fontSize=b0[i]*sf+'px');}
+   while(cf>minC&&bad()){cf-=.05;c.style.fontSize=c0*cf+'px';ss.forEach((x,i)=>x.style.fontSize=b0[i]*sf*cf+'px');}};
+  if(rg){run(1,.3);return;}
+  run(.6,.7);
+  if(bad()){cl.remove('nw');c.style.fontSize='';ss.forEach(x=>x.style.fontSize='');run(.75,.35);}
+ });
+}
 subjPanel();render();
+if(document.fonts)document.fonts.ready.then(()=>{fitLines();shrink();});
 </script>
 </body>
 </html>
